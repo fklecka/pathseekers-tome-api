@@ -13,6 +13,7 @@ use App\Http\Controllers\RuestungExtraController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ZauberController;
 use App\Http\Controllers\AuthController;
 
@@ -31,7 +32,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/remember', [AuthController::class, 'rememberLogin']);
 
 Route::post('/password/email', [ForgotPasswordController::class,'sendResetLinkEmail']);
-Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+Route::post('/password/reset', [ResetPasswordController::class,'reset']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -43,9 +44,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::put('account/edit/{id}', [AccountController::class, 'editAccount']);
-    Route::put('account/abo/{id}', [AccountController::class, 'changeAbo']);
-    Route::delete('account/delete', [AccountController::class, 'deleteAccount']);
+    Route::put('/account/edit', [AccountController::class, 'editAccount']);
+    Route::put('/account/abo', [AccountController::class, 'changeAbo']);
+    Route::delete('/account/delete', [AccountController::class, 'deleteAccount']);
 });
 
 

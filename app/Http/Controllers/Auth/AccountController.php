@@ -12,66 +12,77 @@ use Illuminate\Http\Request;
 class AccountController extends Controller {
 
 
-    public function editAccount($id, Request $request)
+    public function editAccount(Request $request)
     {
-        $user = User::findOrFail($id);
 
-        $validator = Validator::make($request->all(), [
-            'username' => [ 'string', 'max:255', 'unique:users', 'alpha_dash', 'nullable'],
-            'email' => [ 'string', 'email', 'max:255', 'unique:users', 'confirmed', 'nullable'],
-        ]);
+        $user = User::findOrFail($request->user()->id);
 
-        if($validator->fails()){
-            return response()->json([
-                'errors' => $validator->errors()
+        if($user){
+            $validator = Validator::make($request->all(), [
+                'username' => [ 'string', 'max:255', 'unique:users', 'alpha_dash', 'nullable'],
+                'email' => [ 'string', 'email', 'max:255', 'unique:users', 'confirmed', 'nullable'],
             ]);
-        }else {
-            if($request['email'] === null){
-                $user->fill($request->only([
-                    'username' => 'username'
-                ]));
-            }else if ($request['username'] === null){
-                $user->fill($request->only([
-                    'email' => 'email',
-                ]));
-            } else {
-                $user->fill($request->only([
-                    'email' => 'email',
-                    'username' => 'username'
-                ]));
+    
+            if($validator->fails()){
+                return response()->json([
+                    'errors' => $validator->errors()
+                ]);
+            }else {
+                if($request['email'] === null){
+                    $user->fill($request->only([
+                        'username' => 'username'
+                    ]));
+                }else if ($request['username'] === null){
+                    $user->fill($request->only([
+                        'email' => 'email',
+                    ]));
+                } else {
+                    $user->fill($request->only([
+                        'email' => 'email',
+                        'username' => 'username'
+                    ]));
+                }
+    
+                $user->save();
+    
+                return response(["success" => "Account wurde bearbeitet"]);
             }
-
-            $user->save();
-
-            return response()->json([
-                'success' => "Profil gespeichert"
-            ]);
+        } else {
+            return response(["error" => "User konnte nicht gefunden werden"]);
         }
+
+        
     }
 
-    public function changeAbo($id, Request $request)
+    public function changeAbo(Request $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->user()->id);
 
-        $validator = Validator::make($request->all(), [
-            'abo' => ['string', 'required', 'max:15']
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                'errors' => 'Nice try'
+        if($user){
+            $validator = Validator::make($request->all(), [
+                'abo' => ['string', 'required', 'max:15']
             ]);
-        } else {
-            $user->fill($request->only([
-                'abo' => 'abo'
-            ]));
     
-            $user->save();
+            if($validator->fails()){
+                return response()->json([
+                    'errors' => 'Nice try'
+                ]);
+            } else {
+                $user->fill($request->only([
+                    'abo' => 'abo'
+                ]));
+        
+                $user->save();
+    
+                return response()->json([
+                    'success' => "Abonnement gewechselt"
+                ]);
+            };
+        }else {
+            return response(["error" => "User konnte nicht gefunden werden"]);
+        }
 
-            return response()->json([
-                'success' => "Abonnement gewechselt"
-            ]);
-        };
+
     }
 
     public function deleteAccount(Request $request) {
