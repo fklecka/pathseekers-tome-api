@@ -74,14 +74,14 @@ class AccountController extends Controller {
         };
     }
 
-    public function deleteAccount($id) {
+    public function deleteAccount(Request $request) {
 
-        $user = User::findOrFail($id);
+        $userId = $request->user()->id;
+
+        $user = User::findOrFail($userId);
 
         $user->delete();
 
-        return response()->json([
-            'success' => "Account wurde gelöscht"
-        ]);
+        return response(["success" => "Account wurde gelöscht"]);
     }
 }
