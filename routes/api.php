@@ -47,6 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/account/edit', [AccountController::class, 'editAccount']);
     Route::put('/account/abo', [AccountController::class, 'changeAbo']);
     Route::delete('/account/delete', [AccountController::class, 'deleteAccount']);
+    Route::resource('characters', CharacterController::class);
 });
 
 
@@ -76,5 +77,3 @@ Route::get('/ruestungextra', [RuestungExtraController::class, 'index']);
 /**
  * Routen für Charaktere
  */
-
-Route::middleware('auth:sanctum')->resource('characters', CharacterController::class);
