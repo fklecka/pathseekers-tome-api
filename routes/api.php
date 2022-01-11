@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ZauberController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,6 @@ use App\Http\Controllers\ZauberController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/remember', [AuthController::class, 'rememberLogin']);
 
 Route::post('/password/email', [ForgotPasswordController::class,'sendResetLinkEmail']);
 Route::post('/password/reset', [ResetPasswordController::class,'reset']);
