@@ -16,7 +16,7 @@ return [
     */
 
     'paths' => [
-        'api/*',
+        '/api/*',
         '/login',
         '/logout',
         '/sanctum/csrf-cookie'
@@ -30,7 +30,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ["Content-Type", "X-Auth-Token", "Authorization", "Origin"],
 
     'max_age' => 0,
 
