@@ -27,6 +27,10 @@ use App\Http\Controllers\ZauberController;
 |
 */
 
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/remember', [AuthController::class, 'rememberLogin']);
+
 Route::post('/password/email', [ForgotPasswordController::class,'sendResetLinkEmail']);
 Route::post('/password/reset', [ResetPasswordController::class,'reset']);
 
