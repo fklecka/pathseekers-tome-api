@@ -74,7 +74,7 @@ Route::get('/leichteruestung', [LeichteRuestungController::class, 'index']);
 Route::get('/mittelschwereruestung', [MittelschwereRuestungController::class, 'index']);
 Route::get('/schwereruestung', [SchwereRuestungController::class, 'index']);
 Route::get('/ruestungextra', [RuestungExtraController::class, 'index']);
-Route::get('/schilde', [SchildeController::class, index]);
+Route::get('/schilde', [SchildeController::class, 'index']);
 
 /**
  * Routen für Charaktere
