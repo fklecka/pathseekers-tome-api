@@ -10,6 +10,7 @@ use App\Http\Controllers\LeichteRuestungController;
 use App\Http\Controllers\MittelschwereRuestungController;
 use App\Http\Controllers\SchwereRuestungController;
 use App\Http\Controllers\RuestungExtraController;
+use App\Http\Controllers\SchildeController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -73,6 +74,7 @@ Route::get('/leichteruestung', [LeichteRuestungController::class, 'index']);
 Route::get('/mittelschwereruestung', [MittelschwereRuestungController::class, 'index']);
 Route::get('/schwereruestung', [SchwereRuestungController::class, 'index']);
 Route::get('/ruestungextra', [RuestungExtraController::class, 'index']);
+Route::get('/schilde', [SchildeController::class, index]);
 
 /**
  * Routen für Charaktere
